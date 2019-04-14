@@ -1,13 +1,24 @@
+#include "moviessearch.h"
 #include <QCoreApplication>
 #include <QDebug>
-#include "controller.h"
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QCoreApplication app(argc, argv);
+    QCoreApplication::setApplicationName("Movies Test");
+    QCoreApplication::setApplicationVersion("1.0");
 
-    Controller con;
-    con.searchMovieByName("the+wolf");
+    QCommandLineParser parser;
+    parser.setApplicationDescription("Search data of movies, series, etc");
+    parser.addVersionOption();
+    parser.addHelpOption();
 
-    return a.exec();
+    MoviesSearch movieSearch(&parser);
+
+    parser.process(app);
+    movieSearch.runMain();
+
+    return app.exec();
 }

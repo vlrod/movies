@@ -20,7 +20,8 @@ SOURCES += \
         main.cpp \
     networkaccessmanager.cpp \
     webrequest.cpp \
-    controller.cpp
+    controller.cpp \
+    moviessearch.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -32,4 +33,5 @@ HEADERS += \
     networkaccessmanager.h \
     iwebrequest.h \
     webrequest.h \
-    controller.h
+    controller.h \
+    moviessearch.h

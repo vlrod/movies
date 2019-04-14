@@ -14,7 +14,6 @@ public:
 
 NetworkAccessManager::NetworkAccessManager(QObject *parent)
     : QObject(parent)
-    , INetworkAccessManager()
 {
     networkAccessImpl.reset(new NetworkAccessManagerImp());
 }

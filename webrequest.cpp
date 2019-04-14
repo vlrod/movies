@@ -49,7 +49,6 @@ private:
 
 WebRequest::WebRequest(QObject* parent, INetworkAccessManager* networkAccessManager)
     : QObject(parent)
-    , IWebRequest()
 {
     webRequestImpl.reset(new WebRequest::WebRequestImpl(this, networkAccessManager));
 }

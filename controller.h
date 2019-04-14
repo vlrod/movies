@@ -12,14 +12,14 @@ class Controller: public QObject
     Q_OBJECT
 public:
     Controller();
-    void searchMovieByName(QString name);
+    void searchMovieByName(const QString& name);
 
 private:
     NetworkAccessManager* networkAccessManager{nullptr};
-    WebRequest* rssWebRequest{nullptr};
+    WebRequest* webRequest{nullptr};
 
 public slots:
-    void onRssReplyReceived(int statusCode, QByteArray body);
+    void onReplyReceived(int statusCode, const QByteArray& body);
 
 };
 

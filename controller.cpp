@@ -6,14 +6,12 @@
 Controller::Controller()
 {
     networkAccessManager = new NetworkAccessManager(this);
-    rssWebRequest = new WebRequest(this, networkAccessManager);
-    QObject::connect(rssWebRequest, &WebRequest::requestComplete, this, &Controller::onRssReplyReceived);
+    webRequest = new WebRequest(this, networkAccessManager);
+    QObject::connect(webRequest, &WebRequest::requestComplete, this, &Controller::onReplyReceived);
 }
 
-void Controller::searchMovieByName(QString name)
+void Controller::searchMovieByName(const QString& name)
 {
-    QVariantMap feed;
-    feed.insert("api_key","9888f455");
     QUrlQuery query;
     query.addQueryItem("apikey","9888f455");
     query.addQueryItem("t", name);
@@ -22,10 +20,10 @@ void Controller::searchMovieByName(QString name)
     url.setScheme("http");
     url.setHost("www.omdbapi.com");
     url.setQuery(query);
-    rssWebRequest->get(url);
+    webRequest->get(url);
 }
 
-void Controller::onRssReplyReceived(int statusCode, QByteArray body)
+void Controller::onReplyReceived(int statusCode, const QByteArray& body)
 {
     qDebug() << "Received response code " << statusCode << ":";
     qDebug() << body;
