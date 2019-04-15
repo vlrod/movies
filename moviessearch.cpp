@@ -6,7 +6,7 @@ MoviesSearch::MoviesSearch(QCommandLineParser *parser)
     : m_parser(parser)
 
 {
-    controller = new Controller();
+    controller = new OmdbServiceApi();
     const static auto _s = QStringLiteral("search");
     const static auto _n = QStringLiteral("name");
     const static auto _t = QStringLiteral("type");

@@ -1,16 +1,16 @@
-#include "controller.h"
+#include "omdbserviceapi.h"
 #include <qjsondocument.h>
 #include <QVariant>
 #include <QUrlQuery>
 
-Controller::Controller()
+OmdbServiceApi::OmdbServiceApi()
 {
     networkAccessManager = new NetworkAccessManager(this);
     webRequest = new WebRequest(this, networkAccessManager);
-    QObject::connect(webRequest, &WebRequest::requestComplete, this, &Controller::onReplyReceived);
+    QObject::connect(webRequest, &WebRequest::requestComplete, this, &OmdbServiceApi::onReplyReceived);
 }
 
-void Controller::searchMovieByName(const QString& name)
+void OmdbServiceApi::searchMovieByName(const QString& name)
 {
     QUrlQuery query;
     query.addQueryItem("apikey","9888f455");
@@ -23,7 +23,7 @@ void Controller::searchMovieByName(const QString& name)
     webRequest->get(url);
 }
 
-void Controller::onReplyReceived(int statusCode, const QByteArray& body)
+void OmdbServiceApi::onReplyReceived(int statusCode, const QByteArray& body)
 {
     qDebug() << "Received response code " << statusCode << ":";
     qDebug() << body;

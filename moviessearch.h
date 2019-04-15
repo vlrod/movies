@@ -4,7 +4,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QString>
-#include "controller.h"
+#include "omdbserviceapi.h"
 
 class QCommandLineParser;
 
@@ -19,7 +19,7 @@ private:
     QCommandLineParser *m_parser;
     QCommandLineOption* type;
     QCommandLineOption* search;
-    Controller* controller;
+    OmdbServiceApi* controller;
 };
 
 #endif // MOVIESSEARCH_H

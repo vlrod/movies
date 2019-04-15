@@ -7,11 +7,11 @@
 
 using namespace networking;
 
-class Controller: public QObject
+class OmdbServiceApi: public QObject
 {
     Q_OBJECT
 public:
-    Controller();
+    OmdbServiceApi();
     void searchMovieByName(const QString& name);
 
 private:

@@ -19,8 +19,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     networkaccessmanager.cpp \
+    omdbserviceapi.cpp \
     webrequest.cpp \
-    controller.cpp \
     moviessearch.cpp
 
 # Default rules for deployment.
@@ -32,6 +32,6 @@ HEADERS += \
     inetworkaccessmanager.h \
     networkaccessmanager.h \
     iwebrequest.h \
+    omdbserviceapi.h \
     webrequest.h \
-    controller.h \
     moviessearch.h
