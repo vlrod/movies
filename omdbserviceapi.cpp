@@ -12,13 +12,26 @@ OmdbServiceApi::OmdbServiceApi()
 
 void OmdbServiceApi::searchMovieByName(const QString& name)
 {
-    QUrlQuery query;
-    query.addQueryItem("apikey","9888f455");
-    query.addQueryItem("t", name);
+    this->makeRequest(name);
+}
 
+void OmdbServiceApi::searchMovieByNameAndType(const QString& name, const QString& type)
+{
+    this->makeRequest(name, type);
+}
+
+void OmdbServiceApi::makeRequest(const QString& name, const QString& type)
+{
     QUrl url;
     url.setScheme("http");
     url.setHost("www.omdbapi.com");
+    QUrlQuery query;
+    query.addQueryItem("apikey","9888f455");
+    query.addQueryItem("t", name);
+    if (type != nullptr) {
+        query.addQueryItem("type", type);
+    }
+
     url.setQuery(query);
     webRequest->get(url);
 }

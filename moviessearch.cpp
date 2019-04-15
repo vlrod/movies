@@ -1,5 +1,5 @@
 #include "moviessearch.h"
-
+#include <cstdlib>
 #include <QDebug>
 
 MoviesSearch::MoviesSearch(QCommandLineParser *parser)
@@ -10,12 +10,11 @@ MoviesSearch::MoviesSearch(QCommandLineParser *parser)
     const static auto _s = QStringLiteral("search");
     const static auto _n = QStringLiteral("name");
     const static auto _t = QStringLiteral("type");
-    const static auto _td = QStringLiteral("contentType");
+    const static auto _ct = QStringLiteral("contentType");
     search = new QCommandLineOption(QStringList() << QStringLiteral("s") << _s,
-                               QStringLiteral("Search for the content title"), _n);
+                                    QStringLiteral("Search for the content title"), _n);
     type = new QCommandLineOption(QStringList() << QStringLiteral("t") << _t,
-                                QStringLiteral("Return only content with specified type"), _td);
-
+                                  QStringLiteral("Return only content with specified type"), _ct);
     m_parser->addOption(*type);
     m_parser->addOption(*search);
 }
@@ -23,18 +22,18 @@ MoviesSearch::MoviesSearch(QCommandLineParser *parser)
 void MoviesSearch::runMain()
 {
     if (!m_parser->isSet(*search)) {
-        m_parser->showHelp(1);
+        m_parser->showHelp(EXIT_FAILURE);
     }
-    if (m_parser->isSet(*search)) {
+
+    if (m_parser->isSet(*search) && m_parser->isSet(*type)) {
+        QString title = m_parser->value(*search);
+        QString stype = m_parser->value(*type);
+        controller->searchMovieByNameAndType(title, stype);
+    } else if (m_parser->isSet(*search)) {
         QString title = m_parser->value(*search);
         controller->searchMovieByName(title);
     }
-    if (m_parser->isSet(*type)) {
-        QString stype = m_parser->value(*type);
-        qDebug() << "search title " << type << "\n";
-    }
 }
-
 
 MoviesSearch::~MoviesSearch()
 {

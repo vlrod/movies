@@ -13,6 +13,10 @@ class OmdbServiceApi: public QObject
 public:
     OmdbServiceApi();
     void searchMovieByName(const QString& name);
+    void searchMovieByNameAndType(const QString& name, const QString& type);
+
+private:
+    void makeRequest(const QString& name, const QString& type = nullptr);
 
 private:
     NetworkAccessManager* networkAccessManager{nullptr};
