@@ -2,7 +2,7 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QCommandLineParser>
-#include <QCommandLineOption>
+
 
 int main(int argc, char *argv[])
 {
