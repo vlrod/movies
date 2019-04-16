@@ -7,7 +7,7 @@ OmdbServiceApi::OmdbServiceApi()
 {
     networkAccessManager = new NetworkAccessManager(this);
     webRequest = new WebRequest(this, networkAccessManager);
-    QObject::connect(webRequest, &WebRequest::requestComplete, this, &OmdbServiceApi::onReplyReceived);
+    QObject::connect(webRequest, &WebRequest::requestComplete, this, &OmdbServiceApi::searchComplete);
 }
 
 void OmdbServiceApi::searchMovieByName(const QString& name)
@@ -34,10 +34,4 @@ void OmdbServiceApi::makeRequest(const QString& name, const QString& type)
 
     url.setQuery(query);
     webRequest->get(url);
-}
-
-void OmdbServiceApi::onReplyReceived(int statusCode, const QByteArray& body)
-{
-    qDebug() << "Received response code " << statusCode << ":";
-    qDebug() << body;
 }

@@ -21,9 +21,8 @@ private:
 private:
     NetworkAccessManager* networkAccessManager{nullptr};
     WebRequest* webRequest{nullptr};
-
-public slots:
-    void onReplyReceived(int statusCode, const QByteArray& body);
+signals:
+    void searchComplete(int statusCode, const QByteArray& body);
 
 };
 

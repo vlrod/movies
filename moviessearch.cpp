@@ -4,7 +4,6 @@
 
 MoviesSearch::MoviesSearch(QCommandLineParser *parser)
     : m_parser(parser)
-
 {
     controller = new OmdbServiceApi();
     const static auto _s = QStringLiteral("search");
@@ -17,6 +16,7 @@ MoviesSearch::MoviesSearch(QCommandLineParser *parser)
                                   QStringLiteral("Return only content with specified type"), _ct);
     m_parser->addOption(*type);
     m_parser->addOption(*search);
+    QObject::connect(controller, &OmdbServiceApi::searchComplete, this, &MoviesSearch::onSearchComplete);
 }
 
 void MoviesSearch::runMain()
@@ -33,6 +33,12 @@ void MoviesSearch::runMain()
         QString title = m_parser->value(*search);
         controller->searchMovieByName(title);
     }
+}
+
+void MoviesSearch::onSearchComplete(int statusCode, const QByteArray& body)
+{
+    qDebug() << "<MoviesSearch> Received response code " << statusCode << ":";
+    qDebug() << body;
 }
 
 MoviesSearch::~MoviesSearch()
