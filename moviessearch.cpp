@@ -1,6 +1,6 @@
 #include "moviessearch.h"
 #include <cstdlib>
-#include <QDebug>
+#include <iostream>
 
 MoviesSearch::MoviesSearch(QCommandLineParser *parser)
     : m_parser(parser)
@@ -37,8 +37,9 @@ void MoviesSearch::runMain()
 
 void MoviesSearch::onSearchComplete(int statusCode, const QByteArray& body)
 {
-    qDebug() << "<MoviesSearch> Received response code " << statusCode << ":";
-    qDebug() << body;
+    std::cout  << "<MoviesSearch> Received response code " << statusCode << ":";
+    std::cout << body.toStdString();
+    std::cout << std::endl;
 }
 
 MoviesSearch::~MoviesSearch()
