@@ -16,7 +16,7 @@ public:
     void searchMovieByNameAndType(const QString& name, const QString& type);
 
 private:
-    void makeRequest(const QString& name, const QString& type = nullptr);
+    QUrl buildUrl(const QUrlQuery& query);
 
 private:
     NetworkAccessManager* networkAccessManager{nullptr};
