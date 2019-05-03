@@ -1,9 +1,19 @@
-QT += testlib
-QT -= gui
-
-CONFIG += qt console warn_on depend_includepath testcase
-CONFIG -= app_bundle
-
 TEMPLATE = app
 
-SOURCES +=  tst_testomdbserviceapi.cpp
+include(../defaults.pri)
+QT += testlib
+QT += network
+
+CONFIG += console
+CONFIG += c++14
+CONFIG -= app_bundle
+CONFIG += qt
+CONFIG += testcase
+
+
+SOURCES += tst_testomdbserviceapi.cpp
+
+LIBS += -L../src -lmyapp
+
+
+

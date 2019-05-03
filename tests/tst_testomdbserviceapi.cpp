@@ -1,5 +1,6 @@
 #include <QtTest>
 #include <QCoreApplication>
+#include "omdbserviceapi.h"
 
 // add necessary includes here
 
@@ -18,7 +19,8 @@ private slots:
 
 testOmdbServiceApi::testOmdbServiceApi()
 {
-
+    OmdbServiceApi controller;
+    controller.searchMovieByName("game");
 }
 
 testOmdbServiceApi::~testOmdbServiceApi()
