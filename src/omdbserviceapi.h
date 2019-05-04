@@ -13,7 +13,7 @@ class OmdbServiceApi: public QObject
     Q_OBJECT
 public:
     OmdbServiceApi();
-    OmdbServiceApi(std::shared_ptr<IWebRequest> wRequest);
+    explicit OmdbServiceApi(std::shared_ptr<IWebRequest> wRequest);
     void searchMovieByName(const QString& name);
     void searchMovieByNameAndType(const QString& name, const QString& type);
 

@@ -12,6 +12,9 @@ public:
     virtual bool isBusy() const = 0;
     virtual void setUrl(const QUrl& url) = 0;
     virtual QUrl url() const = 0;
+
+signals:
+    virtual void requestComplete(int statusCode, QByteArray body) = 0;
 };
 }
 

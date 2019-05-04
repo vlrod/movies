@@ -10,10 +10,9 @@ OmdbServiceApi::OmdbServiceApi()
     QObject::connect(std::static_pointer_cast<WebRequest>(webResquest).get(), &WebRequest::requestComplete, this, &OmdbServiceApi::searchComplete);
 }
 
-OmdbServiceApi::OmdbServiceApi(std::shared_ptr<IWebRequest> wRequest)
+OmdbServiceApi::OmdbServiceApi(std::shared_ptr<IWebRequest> wRequest): webResquest(wRequest)
 {
-    webResquest = std::static_pointer_cast<WebRequest>(wRequest);
-    QObject::connect(std::static_pointer_cast<WebRequest>(webResquest).get(), &WebRequest::requestComplete, this, &OmdbServiceApi::searchComplete);
+   QObject::connect(dynamic_cast<QObject*>(webResquest.get()), SIGNAL(requestComplete(int, QByteArray)), this, SIGNAL(searchComplete(int, QByteArray)));
 }
 
 void OmdbServiceApi::searchMovieByName(const QString& name)
