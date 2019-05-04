@@ -5,16 +5,22 @@
 
 OmdbServiceApi::OmdbServiceApi()
 {
-    networkAccessManager = new NetworkAccessManager(this);
-    webRequest = new WebRequest(this, networkAccessManager);
-    QObject::connect(webRequest, &WebRequest::requestComplete, this, &OmdbServiceApi::searchComplete);
+    networkAccessManager = std::make_shared<NetworkAccessManager>();
+    webResquest = std::make_shared<WebRequest>(this, networkAccessManager.get());
+    QObject::connect(std::static_pointer_cast<WebRequest>(webResquest).get(), &WebRequest::requestComplete, this, &OmdbServiceApi::searchComplete);
+}
+
+OmdbServiceApi::OmdbServiceApi(std::shared_ptr<IWebRequest> wRequest)
+{
+    webResquest = std::static_pointer_cast<WebRequest>(wRequest);
+    QObject::connect(std::static_pointer_cast<WebRequest>(webResquest).get(), &WebRequest::requestComplete, this, &OmdbServiceApi::searchComplete);
 }
 
 void OmdbServiceApi::searchMovieByName(const QString& name)
 {
     QUrlQuery query;
     query.addQueryItem("t", name);
-    webRequest->get(buildUrl(query));
+    webResquest->get(buildUrl(query));
 }
 
 void OmdbServiceApi::searchMovieByNameAndType(const QString& name, const QString& type)
@@ -22,7 +28,7 @@ void OmdbServiceApi::searchMovieByNameAndType(const QString& name, const QString
     QUrlQuery query;
     query.addQueryItem("t", name);
     query.addQueryItem("type", type);
-    webRequest->get(buildUrl(query));
+    webResquest->get(buildUrl(query));
 }
 
 QUrl OmdbServiceApi::buildUrl(const QUrlQuery& query)

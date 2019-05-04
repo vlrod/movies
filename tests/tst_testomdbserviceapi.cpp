@@ -1,8 +1,10 @@
 #include <QtTest>
 #include <QCoreApplication>
 #include "omdbserviceapi.h"
-
-// add necessary includes here
+#include "iwebrequest.h"
+#include <iostream>
+#include <memory>
+#include "webrequestfake.hpp"
 
 class testOmdbServiceApi : public QObject
 {
@@ -10,27 +12,21 @@ class testOmdbServiceApi : public QObject
 
 public:
     testOmdbServiceApi();
-    ~testOmdbServiceApi();
 
 private slots:
-    void test_case1();
+    void testSearchValidname();
 
 };
 
 testOmdbServiceApi::testOmdbServiceApi()
 {
-    OmdbServiceApi controller;
-    controller.searchMovieByName("game");
 }
 
-testOmdbServiceApi::~testOmdbServiceApi()
+void testOmdbServiceApi::testSearchValidname()
 {
-
-}
-
-void testOmdbServiceApi::test_case1()
-{
-
+    std::shared_ptr<IWebRequest> i = std::make_shared<WebRequestFake>();
+    std::unique_ptr<OmdbServiceApi> omdb(new OmdbServiceApi(i));
+    omdb->searchMovieByName("game");
 }
 
 QTEST_MAIN(testOmdbServiceApi)

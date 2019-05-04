@@ -4,6 +4,7 @@
 #include "networkaccessmanager.h"
 #include "webrequest.h"
 #include <QObject>
+#include <memory>
 
 using namespace networking;
 
@@ -12,6 +13,7 @@ class OmdbServiceApi: public QObject
     Q_OBJECT
 public:
     OmdbServiceApi();
+    OmdbServiceApi(std::shared_ptr<IWebRequest> wRequest);
     void searchMovieByName(const QString& name);
     void searchMovieByNameAndType(const QString& name, const QString& type);
 
@@ -19,8 +21,8 @@ private:
     QUrl buildUrl(const QUrlQuery& query);
 
 private:
-    NetworkAccessManager* networkAccessManager{nullptr};
-    WebRequest* webRequest{nullptr};
+    std::shared_ptr<NetworkAccessManager> networkAccessManager;
+    std::shared_ptr<IWebRequest> webResquest;
 signals:
     void searchComplete(int statusCode, const QByteArray& body);
 

@@ -15,5 +15,8 @@ SOURCES += tst_testomdbserviceapi.cpp
 
 LIBS += -L../src -lmyapp
 
+HEADERS += \
+    webrequestfake.hpp
+
 
 

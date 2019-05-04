@@ -26,8 +26,6 @@ SOURCES += \
     webrequest.cpp \
     moviessearch.cpp
 
-
-
 HEADERS += \
     inetworkaccessmanager.h \
     networkaccessmanager.h \
