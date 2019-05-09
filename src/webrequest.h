@@ -24,7 +24,7 @@ public:
 signals:
     void error(QString message);
     void isBusyChanged();
-    void requestComplete(int statusCode, QByteArray body);
+    void requestComplete(int statusCode, QByteArray body) override;
     void urlChanged();
 
 private slots:
